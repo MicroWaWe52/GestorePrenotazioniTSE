@@ -48,7 +48,7 @@
             this.buttonRifiuta.Name = "buttonRifiuta";
             this.buttonRifiuta.Size = new System.Drawing.Size(75, 23);
             this.buttonRifiuta.TabIndex = 2;
-            this.buttonRifiuta.Text = "Rifiuta";
+            this.buttonRifiuta.Text = "Cancella";
             this.buttonRifiuta.UseVisualStyleBackColor = true;
             this.buttonRifiuta.Click += new System.EventHandler(this.buttonRifiuta_Click);
             // 
