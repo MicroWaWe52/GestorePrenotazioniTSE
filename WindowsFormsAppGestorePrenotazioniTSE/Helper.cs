@@ -48,7 +48,10 @@ namespace WindowsFormsAppGestorePrenotazioniTSE
             return reader.ReadToEnd();
         }
 
-        private void WritePrenotazioni(Prenotazioni prenotazioni)
+
+
+
+        public static void WritePrenotazioni(Prenotazioni prenotazioni)
         {
             var request = (FtpWebRequest)WebRequest.Create("ftp://www.teatrotse.com/teatrotse.com/Biglietteria/prenotazioni.txt");
             request.Method = WebRequestMethods.Ftp.UploadFile;

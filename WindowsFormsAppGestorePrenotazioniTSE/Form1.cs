@@ -16,11 +16,11 @@ namespace WindowsFormsAppGestorePrenotazioniTSE
         public Form1()
         {
             InitializeComponent();
-            
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Aggiorna()
         {
+            listBoxPrenotazioni.Items.Clear();
             prenotazioni = Helper.GetPrenotazioni();
             var rawprenotazione = Helper.GetPrenotazioniString(prenotazioni);
             var prenotazioniArray = rawprenotazione.Split('/');
@@ -29,6 +29,38 @@ namespace WindowsFormsAppGestorePrenotazioniTSE
             {
                 listBoxPrenotazioni.Items.Add(prenotazione);
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Aggiorna();
+            var timer = new Timer
+            {
+                Enabled = true,
+                Interval = 60000
+                
+            };
+            timer.Tick += Timer_Tick;
+            
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            Aggiorna();
+        }
+
+        private void buttonRifiuta_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                prenotazioni.ListaPrenotazioni.RemoveAt(listBoxPrenotazioni.SelectedIndex);
+                Helper.WritePrenotazioni(prenotazioni);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Selezioina una prenotazione");
+            }finally{Aggiorna();}
         }
     }
 }

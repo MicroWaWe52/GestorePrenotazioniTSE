@@ -48,6 +48,7 @@
             this.buttonRifiuta.TabIndex = 2;
             this.buttonRifiuta.Text = "Rifiuta";
             this.buttonRifiuta.UseVisualStyleBackColor = true;
+            this.buttonRifiuta.Click += new System.EventHandler(this.buttonRifiuta_Click);
             // 
             // Form1
             // 
