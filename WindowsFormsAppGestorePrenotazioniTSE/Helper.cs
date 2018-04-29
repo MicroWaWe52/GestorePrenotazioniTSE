@@ -73,6 +73,21 @@ namespace WindowsFormsAppGestorePrenotazioniTSE
             }
             return rawPrenotazioni;
         }
+
+        public static Prenotazione GetPrenotazioneString(string preString)
+        {
+            var infoPrenotazione = preString.Split(',');
+            return  new Prenotazione
+            {
+                Evento = infoPrenotazione[0],
+                Nome = infoPrenotazione[1],
+                Cognome = infoPrenotazione[2],
+                Email = infoPrenotazione[3],
+                Numero = infoPrenotazione[4],
+                Posti = infoPrenotazione[6]
+
+            };
+        }
     }
 
 

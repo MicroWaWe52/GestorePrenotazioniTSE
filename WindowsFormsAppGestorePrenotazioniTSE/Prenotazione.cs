@@ -20,5 +20,16 @@ namespace WindowsFormsAppGestorePrenotazioniTSE
 
         }
 
+        public override bool Equals(object obj)
+        {
+            var prenotazione = obj as Prenotazione;
+            return prenotazione != null &&
+                   Evento == prenotazione.Evento &&
+                   Nome == prenotazione.Nome &&
+                   Cognome == prenotazione.Cognome &&
+                   Email == prenotazione.Email &&
+                   Numero == prenotazione.Numero &&
+                   Posti == prenotazione.Posti;
+        }
     }
 }
