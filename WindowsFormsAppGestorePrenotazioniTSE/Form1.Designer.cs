@@ -36,10 +36,12 @@
             // 
             // listBoxPrenotazioni
             // 
+            this.listBoxPrenotazioni.Font = new System.Drawing.Font("Microsoft Sans Serif", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxPrenotazioni.FormattingEnabled = true;
+            this.listBoxPrenotazioni.ItemHeight = 29;
             this.listBoxPrenotazioni.Location = new System.Drawing.Point(13, 39);
             this.listBoxPrenotazioni.Name = "listBoxPrenotazioni";
-            this.listBoxPrenotazioni.Size = new System.Drawing.Size(742, 277);
+            this.listBoxPrenotazioni.Size = new System.Drawing.Size(742, 265);
             this.listBoxPrenotazioni.TabIndex = 0;
             // 
             // buttonRifiuta
@@ -59,6 +61,8 @@
             this.textBoxCerca.Size = new System.Drawing.Size(160, 20);
             this.textBoxCerca.TabIndex = 3;
             this.textBoxCerca.TextChanged += new System.EventHandler(this.textBoxCerca_TextChanged);
+            this.textBoxCerca.Enter += new System.EventHandler(this.textBoxCerca_Enter);
+            this.textBoxCerca.Leave += new System.EventHandler(this.textBoxCerca_Leave);
             // 
             // comboBoxSearchEventi
             // 
@@ -79,7 +83,7 @@
             this.Controls.Add(this.buttonRifiuta);
             this.Controls.Add(this.listBoxPrenotazioni);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Gestore prenotazioni TSE";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

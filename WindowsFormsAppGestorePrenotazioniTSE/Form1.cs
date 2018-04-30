@@ -16,6 +16,7 @@ namespace WindowsFormsAppGestorePrenotazioniTSE
         public Form1()
         {
             InitializeComponent();
+
         }
 
         private void Aggiorna()
@@ -55,7 +56,8 @@ namespace WindowsFormsAppGestorePrenotazioniTSE
 
             };
             timer.Tick += Timer_Tick;
-
+            textBoxCerca.Text = "Cerca per Nome o cognome";
+            textBoxCerca.ForeColor = Color.Gray;
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -89,43 +91,19 @@ namespace WindowsFormsAppGestorePrenotazioniTSE
 
         private void textBoxCerca_TextChanged(object sender, EventArgs e)
         {
-            comboBoxSearchEventi.Text = "Tutti";
-            var searchPrenotazioni = new List<Prenotazione>();
-            var i = 0;
-            foreach (var prenotazione in prenotazioni.ListaPrenotazioni)
+            if (textBoxCerca.Text == "Cerca per Nome o cognome")
             {
-                if (prenotazione.Nome.Contains(textBoxCerca.Text) || prenotazione.Cognome.Contains(textBoxCerca.Text))
-                {
-                    searchPrenotazioni.Add(prenotazione);
-                    i++;
-                }
+                return;
             }
-            listBoxPrenotazioni.Items.Clear();
-            var p = new Prenotazioni { ListaPrenotazioni = searchPrenotazioni };
-            var rawprenotazione = Helper.GetPrenotazioniString(p);
-            var prenotazioniArray = rawprenotazione.Split('/');
-            Array.Resize(ref prenotazioniArray, prenotazioniArray.Length - 1);
-            foreach (var prenotazione in prenotazioniArray)
+            if (textBoxCerca.Text!="")
             {
-                listBoxPrenotazioni.Items.Add(prenotazione);
-            }
-        }
-
-        private void comboBoxSearchEventi_SelectedIndexChanged(object sender, EventArgs e)
-        {
-           
-            if (comboBoxSearchEventi.Text == "Tutti")
-            {
-                Aggiorna();
-            }
-            else
-            {
-                textBoxCerca.Text = "";
+                textBoxCerca.ForeColor = Color.Black;
+                comboBoxSearchEventi.Text = "Tutti";
                 var searchPrenotazioni = new List<Prenotazione>();
                 var i = 0;
                 foreach (var prenotazione in prenotazioni.ListaPrenotazioni)
                 {
-                    if (prenotazione.Evento == comboBoxSearchEventi.Text)
+                    if (prenotazione.Nome.Contains(textBoxCerca.Text) || prenotazione.Cognome.Contains(textBoxCerca.Text))
                     {
                         searchPrenotazioni.Add(prenotazione);
                         i++;
@@ -141,7 +119,81 @@ namespace WindowsFormsAppGestorePrenotazioniTSE
                     listBoxPrenotazioni.Items.Add(prenotazione);
                 }
             }
+            else
+            {
+                textBoxCerca.ForeColor = Color.Black;
+                var searchPrenotazioni = new List<Prenotazione>();
+                var i = 0;
+                foreach (var prenotazione in prenotazioni.ListaPrenotazioni)
+                {
+                    if (prenotazione.Nome.Contains(textBoxCerca.Text) || prenotazione.Cognome.Contains(textBoxCerca.Text))
+                    {
+                        searchPrenotazioni.Add(prenotazione);
+                        i++;
+                    }
+                }
+                listBoxPrenotazioni.Items.Clear();
+                var p = new Prenotazioni { ListaPrenotazioni = searchPrenotazioni };
+                var rawprenotazione = Helper.GetPrenotazioniString(p);
+                var prenotazioniArray = rawprenotazione.Split('/');
+                Array.Resize(ref prenotazioniArray, prenotazioniArray.Length - 1);
+                foreach (var prenotazione in prenotazioniArray)
+                {
+                    listBoxPrenotazioni.Items.Add(prenotazione);
+                }
+            }
+           
+        }
 
+        private void comboBoxSearchEventi_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (comboBoxSearchEventi.Text == "Tutti")
+            {
+                Aggiorna();
+                textBoxCerca.Text = "Cerca per Nome o cognome";
+                textBoxCerca.ForeColor = Color.Gray;
+
+            }
+            else
+            {
+                textBoxCerca.Text = "";
+                var searchPrenotazioni = new List<Prenotazione>();
+                foreach (var prenotazione in prenotazioni.ListaPrenotazioni)
+                {
+                    if (prenotazione.Evento == comboBoxSearchEventi.Text)
+                    {
+                        searchPrenotazioni.Add(prenotazione);
+                    }
+                }
+                listBoxPrenotazioni.Items.Clear();
+                var p = new Prenotazioni { ListaPrenotazioni = searchPrenotazioni };
+                var rawprenotazione = Helper.GetPrenotazioniString(p);
+                var prenotazioniArray = rawprenotazione.Split('/');
+                Array.Resize(ref prenotazioniArray, prenotazioniArray.Length - 1);
+                foreach (var prenotazione in prenotazioniArray)
+                {
+                    listBoxPrenotazioni.Items.Add(prenotazione);
+                }
+            }
+
+        }
+
+        private void textBoxCerca_Enter(object sender, EventArgs e)
+        {
+            if (textBoxCerca.Text == "Cerca per Nome o cognome")
+            {
+                textBoxCerca.Text = "";
+            }
+        }
+
+        private void textBoxCerca_Leave(object sender, EventArgs e)
+        {
+            if (textBoxCerca.Text == "")
+            {
+                textBoxCerca.Text = "Cerca per Nome o cognome";
+                textBoxCerca.ForeColor = Color.Gray;
+            }
         }
     }
 }
